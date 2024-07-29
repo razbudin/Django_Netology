@@ -1,0 +1,14 @@
+{% extends "./base.html" %}
+
+{% block title %} Рабочая дирректория {% endblock %}
+    
+{% block content %}
+  <h1>Файлы и каталоги в рабочей директории</h1>
+  {% for wd in workdir %}
+    <b>{{ wd }}</b>
+    <br>
+  {% endfor %}
+  <br>
+  <a href="/">Домой</a>
+{% endblock %}
+
