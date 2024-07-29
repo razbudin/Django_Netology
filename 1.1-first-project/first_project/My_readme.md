@@ -1,4 +1,4 @@
-[RADME.md](./README.md)
+[README.md](./README.md)
 
 
 Создал шаблоны base.html, time.html, workdir.html \
