@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Добро пожаловать</title>
+</head>
+<body>
+<H2>Рецепты<H2>
+{% for key in data.keys %}
+      <a href='{{ key }}/'>{{ key }}</a>
+      <br>
+{% empty %}
+    <p>Похоже что словарь с рецептами пуст<br>или что то пошло не так</p>
+{% endfor %}
+</body>
+</html>

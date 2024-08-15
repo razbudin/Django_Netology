@@ -28,3 +28,23 @@ DATA = {
 #     'ингредиент2': количество2,
 #   }
 # }
+
+
+def home(request):
+    data = {'data': DATA}
+    return render(request, 'calculator/home.html', context=data)
+
+
+def dish_ingredients(request, dish):
+    servings = int(request.GET.get("servings", 1))
+    if servings == 1:
+        food = DATA.get(dish)
+    else:
+        food = DATA.get(dish)
+        for key, value in food.items():
+            food[key] = value * servings
+    data = {
+        'dish': dish,
+        'recipe': food
+    }
+    return render(request, 'calculator/index.html', context=data)

@@ -5,6 +5,7 @@
     <title>Рецепты</title>
 </head>
 <body>
+<H2>Рецепт приготовления "{{ dish }}"</H2>
 {% for ingredient, amount in recipe.items %}
     <p>{{ ingredient }}: {{ amount }}</p>
 {% empty %}
