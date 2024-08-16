@@ -25,30 +25,50 @@
         <table class="u-full-width">
             <thead>
             <tr>
-                <th>Name</th>
-                <th>Street</th>
-                <th>District</th>
+                <th>Name<br>Название</th>
+                <th>AdmArea<br>Административный округ</th>
+                <th>District<br>Район</th>
             </tr>
             </thead>
             <tbody>
             {% for station in bus_stations %}
                 <tr>
                     <td>{{ station.Name }}</td>
-                    <td>{{ station.Street }}</td>
+                    <td>{{ station.AdmArea }}</td>
                     <td>{{ station.District }}</td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
-
+        <!-- # Кнопка назад -->
         {% if page.has_previous %}
             <a class="button button-primary" href="?page={{ page.previous_page_number }}">⟵</a>
         {% endif %}
-        <a class="button disabled" href="">{{ page.number }}</a>
+        <!-- # ... -->
+        {% if page.number > 3 %}
+            <a class="button button-primary" href="?page=1">1</a>
+            {% if page.number > 4 %}
+                <a class="button disabled" href=""> ... </a>
+            {% endif %}
+        {% endif %}
+                
+        <!-- # Предыдущая, текущая и следующие страницы -->
+        {% for num_page in page.paginator.page_range %}
+            {% if num_page == page.number %}
+                <a class="button disabled" href="">{{ page.number }}</a>
+            {% elif num_page > page.number|add:'-3' and num_page < page.number|add:'3' %}
+                <a class="button button-primary" href="?page={{ num_page }}">{{ num_page }}</a>
+            {% endif %}
+        {% endfor %}
+        <!-- # Кнопка вперед, ..., и последняя страница -->
         {% if page.has_next %}
+            {% if page.number < page.paginator.num_pages|add:'-3' %}
+                <a class="button disabled" href=""> ... </a>
+                <a class="button button-primary" href="?page={{ page.paginator.num_pages }}">{{ page.paginator.num_pages }}</a>
+            {% elif page.number < page.paginator.num_pages|add:'-2' %}
+                <a class="button button-primary" href="?page={{ page.paginator.num_pages }}">{{ page.paginator.num_pages }}</a>
+            {% endif %}
             <a class="button button-primary" href="?page={{ page.next_page_number }}">⟶</a>
         {% endif %}
-    </div>
-</div>
 </body>
 </html>
