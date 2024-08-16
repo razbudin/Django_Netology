@@ -16,18 +16,22 @@ DATA = {
         'сыр, ломтик': 1,
         'помидор, ломтик': 1,
     },
-    # можете добавить свои рецепты ;)
+    'julienne': {
+        'Филе куриное, г': 400,
+        'Грибы шампиньоны, г': 300,
+        'Лук репчатый, г': 100,
+        'Сливки 20-30%, мл': 200,
+        'Сыр твердый, г': 150,
+        'Масло растительное, ст.л': 2,
+    },
+    'shkmeruli': {
+        'Курица, г': 600,
+        'Молоко, мл': 100,
+        'Вода, мл': 80,
+        'Чеснок, головка': 1,
+        'Масло растительное, мл': 30
+    },
 }
-
-# Напишите ваш обработчик. Используйте DATA как источник данных
-# Результат - render(request, 'calculator/index.html', context)
-# В качестве контекста должен быть передан словарь с рецептом:
-# context = {
-#   'recipe': {
-#     'ингредиент1': количество1,
-#     'ингредиент2': количество2,
-#   }
-# }
 
 
 def home(request):
@@ -37,14 +41,14 @@ def home(request):
 
 def dish_ingredients(request, dish):
     servings = int(request.GET.get("servings", 1))
-    if servings == 1:
-        food = DATA.get(dish)
-    else:
-        food = DATA.get(dish)
+    food = DATA.get(dish)
+    ingredients = {}
+    if food is not None:
         for key, value in food.items():
-            food[key] = value * servings
+            ingredients[key] = round(value * servings, 3)
     data = {
         'dish': dish,
-        'recipe': food
+        'recipe': ingredients,
+        'servings': servings
     }
     return render(request, 'calculator/index.html', context=data)

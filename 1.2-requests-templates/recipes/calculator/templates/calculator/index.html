@@ -5,11 +5,13 @@
     <title>Рецепты</title>
 </head>
 <body>
-<H2>Рецепт приготовления "{{ dish }}"</H2>
+        <H2>Ингредиенты для приготовления "{{ dish }}" на {{ servings }} человек(а)</H2>
 {% for ingredient, amount in recipe.items %}
     <p>{{ ingredient }}: {{ amount }}</p>
 {% empty %}
-    <p>Такого рецепта не знаю :(</p>
+        <p>Не знаю рецепта для приготовления "{{ dish }}"<br>
+        Попробуйте изменить запрос.
+        </p>
 {% endfor %}
 </body>
 </html>
